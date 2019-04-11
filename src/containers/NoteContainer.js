@@ -7,8 +7,8 @@ class NoteContainer extends React.Component {
   render() {
 
     return (
-      <div>
-        {notes.map(note => <NoteCard note={note} />)}
+      <div className="note-container">
+        {notes.map(note => <NoteCard key={note.id} note={note} />)}
       </div>
     )
   }
