@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import CategorySelect from '../components/CategorySelect'
 import CategoryForm from '../components/CategoryForm'
 
+
 class HeaderContainer extends Component {
   state = {
     toggle: false
@@ -16,16 +17,18 @@ class HeaderContainer extends Component {
       return (
         <span>
         <button onClick={this.toggleFunc}>NEW CATEGORY</button>
-        <CategorySelect />
-        <button>STICK IT</button>
+        <CategorySelect categories={this.props.categories} />
+        <button onClick={() => this.props.pageFunc("new note")}>STICK IT</button>
         </span>
       )
       } else {
-        return <CategoryForm />
+        return <CategoryForm addCategory={this.props.addCategory} toggleFunc={this.toggleFunc}/>
       }
   }
+
+
   render() {
-  
+
     console.log(this.state)
 
     return (

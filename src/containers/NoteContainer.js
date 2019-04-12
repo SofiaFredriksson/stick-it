@@ -1,14 +1,18 @@
 import React from 'react'
 import NoteCard from '../components/NoteCard'
-import notes from '../dummyData'
+
 
 class NoteContainer extends React.Component {
 
-  render() {
+  renderNotes() {
+    const notes = this.props.notes
+    return notes.map((note, index) => <NoteCard key={index} note={note} />)
+  }
 
+  render() {
     return (
       <div className="note-container">
-        {notes.map(note => <NoteCard key={note.id} note={note} />)}
+        {this.renderNotes()}
       </div>
     )
   }

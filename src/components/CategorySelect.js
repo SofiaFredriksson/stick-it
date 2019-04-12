@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 const CategorySelect = (props) => {
+
+  const renderCategories = () => props.categories.map((category, index) => <option key={index} value="category.name">{category.name}</option>)
+
   return (
     <select>
-      <option value="work">Work</option>
-      <option value="social">Social</option>
-      <option value="health">Health</option>
-      <option value="appointment">Appointment</option>
+      {renderCategories()}
     </select>
   )
 }

@@ -1,5 +1,4 @@
-import React from 'react'
-import { Card, Feed } from 'semantic-ui-react'
+import React from 'react' 
 
 class NoteCard extends React.Component {
 
