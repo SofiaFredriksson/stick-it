@@ -8,6 +8,7 @@ class CategoryForm extends React.Component {
       <form>
         <input name="category" type="text" value=""/>
         <input name="colour" type="text" value=""/>
+        
       </form>
     )
   }

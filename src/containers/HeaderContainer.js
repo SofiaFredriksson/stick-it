@@ -25,7 +25,7 @@ class HeaderContainer extends Component {
       }
   }
   render() {
-    debugger
+  
     console.log(this.state)
 
     return (
