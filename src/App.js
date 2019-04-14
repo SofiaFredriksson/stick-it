@@ -16,7 +16,18 @@ class App extends Component {
   state = {
     page: "default",
     categories: categories,
-    notes: [...notes]
+    notes: [],
+    user_id: 1
+  }
+
+  componentDidMount () {
+    fetch(`http://localhost:3000/users/${this.state.user_id}`)
+    .then(resp => resp.json())
+    .then(data => this.setState({
+      notes: data.notes,
+      categories: data.categories
+
+    }))
   }
 
   renderSection = () => {
@@ -47,14 +58,14 @@ class App extends Component {
     })
   }
 
-addNote = (note) => {
-  this.setState({
-    notes: [...this.state.notes, note]
-  })
-}
+  addNote = (note) => {
+    this.setState({
+      notes: [...this.state.notes, note]
+    })
+  }
 
   render() {
-    console.log(this.state.notes)
+    console.log(this.state)
     return (
       <div className="App">
         <HeaderContainer pageFunc={this.renderNoteForm} addCategory={this.addCategory} categories={this.state.categories}/>
