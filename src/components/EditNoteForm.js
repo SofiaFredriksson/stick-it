@@ -2,8 +2,9 @@ import React from 'react'
 
 class NoteForm extends React.Component {
   state = {
-    title: "",
-    content: "",
+    title: this.props.currentNote.title,
+    content: this.props.currentNote.content,
+    id: this.props.currentNote.id
   }
 
   handleChange = (event) => {
@@ -14,12 +15,12 @@ class NoteForm extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    this.props.action(this.state)
+    this.props.editNote(this.state)
     this.props.pageFunc("default")
   }
 
   render() {
-
+    console.log(this.state)
     return (
       <form onSubmit={this.handleSubmit}>
         <input name="title" type="text" value={this.state.title} onChange={this.handleChange}/>

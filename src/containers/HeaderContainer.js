@@ -27,9 +27,6 @@ class HeaderContainer extends Component {
 
 
   render() {
-
-    console.log(this.state)
-
     return (
       <div className="header-container">
         <h1>Welcome to Stick-It</h1>

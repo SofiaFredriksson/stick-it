@@ -22,7 +22,7 @@ class CategorySelect extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} >
         <select value={this.state.value} onChange={this.handleChange}>
           {this.renderCategories()}
         </select>

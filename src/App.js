@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NoteContainer from './containers/NoteContainer'
 import HeaderContainer from './containers/HeaderContainer'
 import NoteForm from './components/NoteForm'
-import notes from './dummyData'
+import EditNoteForm from './components/EditNoteForm'
 import './App.css';
 
 class App extends Component {
@@ -11,7 +11,8 @@ class App extends Component {
     categories: [],
     notes: [],
     user_id: 1,
-    selectedCategoryId: "empty"
+    selectedCategoryId: "empty",
+    currentNote: {}
   }
 
   componentDidMount () {
@@ -26,36 +27,85 @@ class App extends Component {
   renderSection = () => {
     switch (this.state.page) {
       case "default":
-        return <NoteContainer findColor={this.findColor} notes={this.state.notes} />;
+        return <NoteContainer findCategory={this.findCategory} findColor={this.findColor} notes={this.state.notes} pageFunc={this.renderPage} setCurrentNote={this.setCurrentNote} deleteNote={this.deleteNote} />;
 
       case "new note":
-        return <NoteForm pageFunc={this.renderNoteForm} addNote={this.addNote}/>;
+        return <NoteForm pageFunc={this.renderPage} action={this.addNote}/>;
 
       case "edit note":
-        return <h1>Hello Edit Note</h1>;
+        return <EditNoteForm pageFunc={this.renderPage} editNote={this.editNote} currentNote={this.state.currentNote}/>;
 
         default:
           return null
     }
   }
 
-  renderNoteForm = (page) =>  {
+  findCategory = (note) => {
+    const category = this.state.categories.find(category => category.id === note.category_id)
+    return category.name
+  }
+
+  renderPage = (page) =>  {
     this.setState({
       page: page
     })
   }
 
   addCategory = (category) => {
-    this.setState({
-      categories: [...this.state.categories, category]
-    })
+    fetch('http://localhost:3000/categories', {
+	     method: "POST",
+       headers: {
+	        "Content-Type" : "application/json" },
+       body: JSON.stringify({...category, user_id: this.state.user_id})
+        })
+	       .then(resp => resp.json())
+         .then(data => this.setState({categories: [...this.state.categories, data]}))
   }
 
   addNote = (note) => {
-    this.setState({
-      notes: [...this.state.notes, note]
-    })
+    fetch('http://localhost:3000/notes', {
+	     method: "POST",
+       headers: {
+	        "Content-Type" : "application/json" },
+       body: JSON.stringify({...note, category_id: this.state.selectedCategoryId })
+        })
+	       .then(resp => resp.json())
+         .then(data => this.setState({notes: [...this.state.notes, data]}))
   }
+
+  deleteNote = (note) => {
+    fetch(`http://localhost:3000/notes/${note.id}`, {method: "DELETE"})
+      .then(resp => resp.json())
+      .then(deletedNote => this.setState({
+        notes: [...this.state.notes.filter(note => note.id !== deletedNote.id)]
+      }))
+  }
+
+  editNote = (note) => {
+    fetch(`http://localhost:3000/notes/${note.id}`, {
+      method: "PATCH",
+      headers: {
+  		"Content-Type" : "application/json"
+      },
+      body: JSON.stringify({
+        note: {
+          title: note.title,
+          content: note.content
+        }
+      })
+    }).then(resp => resp.json())
+      .then(updatedNote => this.setState({
+        notes: this.state.notes.map(note => {
+          if (note.id !== updatedNote.id) return note;
+          return updatedNote;
+        })
+      }))
+  }
+
+  setCurrentNote = (note) => {
+    this.setState({currentNote: note}, this.renderPage("edit note"))
+  }
+
 
   findColor = (note) => {
     const category = this.state.categories.find(cat => cat.id === note.category_id)
@@ -69,10 +119,9 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.selectedCategoryId)
     return (
       <div className="App">
-        <HeaderContainer pageFunc={this.renderNoteForm} addCategory={this.addCategory} setCat={this.setCategoryId} categories={this.state.categories}/>
+        <HeaderContainer pageFunc={this.renderPage} addCategory={this.addCategory} setCat={this.setCategoryId} categories={this.state.categories}/>
         {this.renderSection()}
       </div>
     );
