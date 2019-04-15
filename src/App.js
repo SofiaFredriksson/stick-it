@@ -3,14 +3,7 @@ import NoteContainer from './containers/NoteContainer'
 import HeaderContainer from './containers/HeaderContainer'
 import NoteForm from './components/NoteForm'
 import notes from './dummyData'
-
 import './App.css';
-
-const categories = [
-  { name: "Work", color: "red" },
-  { name: "Business", color: "blue" },
-  { name: "Social", color: "green" }
-]
 
 class App extends Component {
   state = {
@@ -32,7 +25,7 @@ class App extends Component {
   renderSection = () => {
     switch (this.state.page) {
       case "default":
-        return <NoteContainer notes={this.state.notes} />;
+        return <NoteContainer findColor={this.findColor} notes={this.state.notes} />;
 
       case "new note":
         return <NoteForm pageFunc={this.renderNoteForm} addNote={this.addNote}/>;
@@ -63,11 +56,13 @@ class App extends Component {
     })
   }
 
-
-
+  findColor = (note) => {
+    const category = this.state.categories.find(cat => cat.id === note.category_id)
+    return category.color
+  }
 
   render() {
-    console.log(this.state)
+
     return (
       <div className="App">
         <HeaderContainer pageFunc={this.renderNoteForm} addCategory={this.addCategory} categories={this.state.categories}/>
