@@ -1,4 +1,5 @@
 import React from 'react'
+import ColorPalette from './ColorPalette'
 
 class CategoryForm extends React.Component {
   state = {
@@ -12,6 +13,10 @@ class CategoryForm extends React.Component {
     })
   }
 
+  setColor = (color) => {
+    this.setState({color: color})
+  }
+
   handleSubmit = (event) => {
     event.preventDefault()
     this.props.toggleFunc()
@@ -19,10 +24,12 @@ class CategoryForm extends React.Component {
   }
 
   render() {
+    console.log(this.state)
     return (
       <form onSubmit={this.handleSubmit}>
+        <label></label>
         <input name="name" type="text" value={this.state.name} onChange={this.handleChange}/>
-        <input name="color" type="text" value={this.state.color} onChange={this.handleChange}/>
+        <ColorPalette setColor={this.setColor}/>
         <button type="submit">Submit</button>
       </form>
     )
