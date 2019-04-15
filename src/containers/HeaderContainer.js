@@ -17,8 +17,7 @@ class HeaderContainer extends Component {
       return (
         <span>
         <button onClick={this.toggleFunc}>NEW CATEGORY</button>
-        <CategorySelect categories={this.props.categories} />
-        <button onClick={() => this.props.pageFunc("new note")}>STICK IT</button>
+        <CategorySelect categories={this.props.categories} pageFunc={this.props.pageFunc} setCat={this.props.setCat} />
         </span>
       )
       } else {

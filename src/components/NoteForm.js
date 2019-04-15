@@ -3,7 +3,7 @@ import React from 'react'
 class NoteForm extends React.Component {
   state = {
     title: "",
-    content: ""
+    content: "",
   }
 
   handleChange = (event) => {

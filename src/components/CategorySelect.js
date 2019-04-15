@@ -1,14 +1,35 @@
 import React from 'react'
 
-const CategorySelect = (props) => {
+class CategorySelect extends React.Component {
+  state = {
+    value: "Health"
+  }
 
-  const renderCategories = () => props.categories.map((category, index) => <option key={index} value="category.name">{category.name}</option>)
+ renderCategories = () => this.props.categories.map((category, index) => <option key={index} value={category.name}> {category.name} </option>)
 
-  return (
-    <select>
-      {renderCategories()}
-    </select>
-  )
+ handleSubmit = (e) => {
+  e.preventDefault()
+  this.props.pageFunc("new note")
+  const category = this.props.categories.find(category => category.name === this.state.value)
+  this.props.setCat(category)
+ }
+
+ handleChange = (event) => {
+   this.setState({
+     value: event.target.value
+   })
+ }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <select value={this.state.value} onChange={this.handleChange}>
+          {this.renderCategories()}
+        </select>
+      <input type="submit" value="Submit" />
+      </form>
+    )
+  }
 }
 
 export default CategorySelect

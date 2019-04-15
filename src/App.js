@@ -10,7 +10,8 @@ class App extends Component {
     page: "default",
     categories: [],
     notes: [],
-    user_id: 1
+    user_id: 1,
+    selectedCategoryId: "empty"
   }
 
   componentDidMount () {
@@ -61,11 +62,17 @@ class App extends Component {
     return category.color
   }
 
-  render() {
+  setCategoryId = (category) => {
+    this.setState({
+      selectedCategoryId: category.id
+    })
+  }
 
+  render() {
+    console.log(this.state.selectedCategoryId)
     return (
       <div className="App">
-        <HeaderContainer pageFunc={this.renderNoteForm} addCategory={this.addCategory} categories={this.state.categories}/>
+        <HeaderContainer pageFunc={this.renderNoteForm} addCategory={this.addCategory} setCat={this.setCategoryId} categories={this.state.categories}/>
         {this.renderSection()}
       </div>
     );
