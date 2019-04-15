@@ -15,7 +15,7 @@ const categories = [
 class App extends Component {
   state = {
     page: "default",
-    categories: categories,
+    categories: [],
     notes: [],
     user_id: 1
   }
@@ -26,7 +26,6 @@ class App extends Component {
     .then(data => this.setState({
       notes: data.notes,
       categories: data.categories
-
     }))
   }
 
@@ -63,6 +62,9 @@ class App extends Component {
       notes: [...this.state.notes, note]
     })
   }
+
+
+
 
   render() {
     console.log(this.state)
