@@ -12,7 +12,7 @@ class HomePage extends Component {
     page: "default",
     categories: [],
     notes: [],
-    user_id: null,
+    user_id: this.props.userID,
     username: null,
     selectedCategoryId: "empty",
     currentNote: {}
@@ -123,6 +123,7 @@ class HomePage extends Component {
   }
 
   render() {
+    console.log(this.state.user_id)
     return (
       <div className="App">
         {
