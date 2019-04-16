@@ -22,7 +22,7 @@ class SignUpContainer extends React.Component {
       body: JSON.stringify({username: this.state.username})
     })
     .then(resp => resp.json())
-    .then(this.props.history.push("/homepage"))
+    .then(() => this.props.history.push("/login"))
 
   }
 
@@ -31,10 +31,7 @@ class SignUpContainer extends React.Component {
   }
 
   render() {
-    const pStyle = {
-  fontSize: '15px',
-  textAlign: 'center'
-};
+  
     return (
       <form onSubmit={this.handleSubmit}>
         <input type="text" name="username" value={this.state.username} onChange={this.handleChange}/>

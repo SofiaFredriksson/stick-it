@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import HomePage from './HomePage'
 import LoginContainer from './containers/LoginContainer'
 import SignUpContainer from './containers/SignUpContainer'
+import HomeContainer from './containers/HomeContainer'
+
 import { Switch, Route, withRouter } from "react-router-dom"
 import './App.css';
 
@@ -18,7 +20,7 @@ class App extends Component {
       .then(resp => resp.json())
       .then(data => this.setState({
         user: data.find(user => user.username === username)
-      }))
+      }, () => this.props.history.push("/homepage")))
   }
 
   toggle = () => {
@@ -52,6 +54,10 @@ class App extends Component {
           <Route
             path="/login"
             render={(routerProps) => <LoginContainer {...routerProps} loginUser={this.loginUser} toggle={this.toggle} /> }
+          />
+          <Route
+            path="/"
+            render={(routerProps) => <HomeContainer {...routerProps}/>}
           />
         </Switch>
       </div>
