@@ -23,20 +23,9 @@ class App extends Component {
       }, () => this.props.history.push("/homepage")))
   }
 
-  toggle = () => {
-    this.setState({
-      toggle: !this.state.toggle
-    })
-  }
 
-  // renderForm = () => {
-  //   if (!this.state.toggle){
-  //    return <LoginContainer loginUser={this.loginUser} toggle={this.toggle} />
-  //   } else {
-  //    return <SignUpContainer toggle={this.toggle} />
-  //  }
-  //  <HomePage userID={this.state.user.id}/>}
-  // }
+
+
 
   render() {
     console.log(this.state.user)
@@ -49,11 +38,11 @@ class App extends Component {
           />
           <Route
             path="/signup"
-            render={(routerProps) => <SignUpContainer {...routerProps} toggle={this.toggle} /> }
+            render={(routerProps) => <SignUpContainer {...routerProps}  /> }
           />
           <Route
             path="/login"
-            render={(routerProps) => <LoginContainer {...routerProps} loginUser={this.loginUser} toggle={this.toggle} /> }
+            render={(routerProps) => <LoginContainer {...routerProps} loginUser={this.loginUser}  /> }
           />
           <Route
             path="/"
