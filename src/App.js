@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import HomePage from './HomePage'
 import LoginContainer from './containers/LoginContainer'
 import SignUpContainer from './containers/SignUpContainer'
+import { Switch, Route, withRouter } from "react-router-dom"
 import './App.css';
 
 
@@ -27,7 +28,7 @@ class App extends Component {
 
   renderForm = () => {
     if (!this.state.toggle){
-     return <LoginContainer loginUser={this.loginUser} />
+     return <LoginContainer loginUser={this.loginUser} toggle={this.toggle} />
     } else {
      return <SignUpContainer toggle={this.toggle} />
    }

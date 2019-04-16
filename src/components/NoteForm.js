@@ -14,8 +14,16 @@ class NoteForm extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    this.props.action(this.state)
-    this.props.pageFunc("default")
+    if (this.state.content.length > 140) {
+      alert("Character Limit Has Been Exceeded.")
+    } else if (this.state.content.length === 0) {
+      alert("Content field can't be empty")
+    } else if (this.state.title.length === 0) {
+      alert("Title Can't Be Empty")
+    } else {
+      this.props.action(this.state)
+      this.props.pageFunc("default")
+    }
   }
 
   render() {
