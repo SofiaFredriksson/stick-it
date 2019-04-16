@@ -13,6 +13,7 @@ class App extends Component {
   }
 
   loginUser = (username) => {
+    console.log("holdit")
     fetch(`http://localhost:3000/users`)
       .then(resp => resp.json())
       .then(data => this.setState({
@@ -26,24 +27,36 @@ class App extends Component {
     })
   }
 
-  renderForm = () => {
-    if (!this.state.toggle){
-     return <LoginContainer loginUser={this.loginUser} toggle={this.toggle} />
-    } else {
-     return <SignUpContainer toggle={this.toggle} />
-   }
-  }
+  // renderForm = () => {
+  //   if (!this.state.toggle){
+  //    return <LoginContainer loginUser={this.loginUser} toggle={this.toggle} />
+  //   } else {
+  //    return <SignUpContainer toggle={this.toggle} />
+  //  }
+  //  <HomePage userID={this.state.user.id}/>}
+  // }
 
   render() {
+    console.log(this.state.user)
     return (
       <div>
-    {this.state.user === null?
-        this.renderForm()
-      :
-      <HomePage userID={this.state.user.id}/>}
-    </div>
+        <Switch>
+          <Route
+            path="/homepage"
+            render={(routerProps) => <HomePage {...routerProps} userID={this.state.user.id}/> }
+          />
+          <Route
+            path="/signup"
+            render={(routerProps) => <SignUpContainer {...routerProps} toggle={this.toggle} /> }
+          />
+          <Route
+            path="/login"
+            render={(routerProps) => <LoginContainer {...routerProps} loginUser={this.loginUser} toggle={this.toggle} /> }
+          />
+        </Switch>
+      </div>
     )
   }
 }
 
-export default App;
+export default withRouter(App);

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Switch, Route, withRouter } from "react-router-dom"
 
 class LoginContainer extends React.Component {
   state = {
@@ -21,15 +22,16 @@ class LoginContainer extends React.Component {
   }
 
   render() {
+    
     return (
       <form onSubmit={this.handleSubmit}>
         <input type="text" name="username" value={this.state.username} onChange={this.handleChange}/>
         <button type="submit">Login</button>
-        <button onClick={this.handleClick}>Signup</button>
+        <button onClick={() => this.props.history.push("/signup")}>Signup</button>
       </form>
     )
   }
 
 }
 
-export default LoginContainer
+export default withRouter(LoginContainer)

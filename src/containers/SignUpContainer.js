@@ -1,4 +1,5 @@
 import React from 'react'
+import { Switch, Route, withRouter } from "react-router-dom"
 
 class SignUpContainer extends React.Component {
 
@@ -21,7 +22,7 @@ class SignUpContainer extends React.Component {
       body: JSON.stringify({username: this.state.username})
     })
     .then(resp => resp.json())
-    .then(this.props.toggle)
+    .then(this.props.history.push("/homepage"))
 
   }
 
@@ -38,11 +39,11 @@ class SignUpContainer extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <input type="text" name="username" value={this.state.username} onChange={this.handleChange}/>
         <button type="submit">Signup</button>
-        <button onClick={this.handleClick}>Login</button>
+        <button onClick={() => this.props.history.push("/login")}>Login</button>
       </form>
     )
   }
 
 }
 
-export default SignUpContainer
+export default withRouter(SignUpContainer)
