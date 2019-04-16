@@ -22,8 +22,8 @@ class NoteForm extends React.Component {
 
     return (
       <form onSubmit={this.handleSubmit}>
-        <input name="title" type="text" value={this.state.title} onChange={this.handleChange}/>
-        <input name="content" type="text-field" value={this.state.content} onChange={this.handleChange}/>
+        <input name="title" type="text" value={this.state.title} onChange={this.handleChange}/><br/>
+        <textarea name="content" type="text" value={this.state.content} onChange={this.handleChange}/><br/>
         <button type="submit">Submit</button>
       </form>
     )

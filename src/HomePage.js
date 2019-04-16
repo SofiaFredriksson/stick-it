@@ -7,7 +7,7 @@ import LoginContainer from './containers/LoginContainer'
 import './App.css';
 
 
-class App extends Component {
+class HomePage extends Component {
   state = {
     page: "default",
     categories: [],
@@ -136,4 +136,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default HomePage;
