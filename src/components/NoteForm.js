@@ -57,8 +57,8 @@ class NoteForm extends React.Component {
     return (
       <div style={this.state.square}>
         <form onSubmit={this.handleSubmit} >
-              <input name="title" type="text" value={this.state.title} onChange={this.handleChange}/><br/>
-              <textarea name="content" type="text" value={this.state.content} onChange={this.handleChange}/><br/>
+              <input name="title" type="text" placeholder="Title" value={this.state.title} onChange={this.handleChange}/><br/>
+              <textarea name="content" type="text" placeholder="Content" value={this.state.content} onChange={this.handleChange}/><br/>
           <button type="submit">Submit</button>
         </form>
       </div>

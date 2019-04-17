@@ -39,7 +39,7 @@ class HeaderContainer extends Component {
     return (
       <div className="header-container">
         <h1>Welcome to Disco Stick-It</h1>
-        <input type="text" placeholder="Search" value={this.state.searchTerm} onChange={this.handleChange}/><br/>
+        <input placeholder="Search By Title" name="Search" type="text" value={this.state.searchTerm} onChange={this.handleChange}/><br/>
         {this.renderPage()}
       </div>
     )

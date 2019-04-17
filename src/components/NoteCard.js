@@ -20,7 +20,7 @@ class NoteCard extends React.Component {
   render () {
 
     return (
-      <div style={this.state.square} >
+      <div style={{...this.state.square, backgroundColor: this.props.findColor(this.props.note)}} >
         <small>{this.props.findCategory(this.props.note)}</small>
           <h2 style={{color: "black"}}>
             {this.props.note.title}

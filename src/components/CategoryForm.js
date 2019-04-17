@@ -32,7 +32,7 @@ class CategoryForm extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <label></label>
-        <input name="name" type="text" value={this.state.name} onChange={this.handleChange}/>
+        <input name="name" type="text" placeholder="Category Name" value={this.state.name} onChange={this.handleChange}/>
         <ColorPalette setColor={this.setColor}/>
         <button type="submit">Submit</button>
       </form>

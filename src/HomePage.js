@@ -32,7 +32,7 @@ class HomePage extends Component {
   renderSection = () => {
     switch (this.state.page) {
       case "default":
-        return <NoteContainer findCategory={this.findCategory} findColor={this.findColor} notes={this.state.notes.filter(note => note.content.toLowerCase().includes(this.state.searchTerm.toLowerCase()) || note.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()))} pageFunc={this.renderPage} setCurrentNote={this.setCurrentNote} deleteNote={this.deleteNote} />;
+        return <NoteContainer findCategory={this.findCategory} findColor={this.findColor} notes={[...this.state.notes].filter(note => note.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()))} pageFunc={this.renderPage} setCurrentNote={this.setCurrentNote} deleteNote={this.deleteNote} />;
 
       case "new note":
         return <NoteForm categoryID={this.state.selectedCategoryId} pageFunc={this.renderPage} action={this.addNote}/>;

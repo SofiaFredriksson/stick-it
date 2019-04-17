@@ -4,7 +4,7 @@
   background-image: url(https://media.giphy.com/media/120ezD4HhB1j7q/giphy.gif);
 }
 
-input[placeholder=Search] {
+input[name=Search] {
   width: 30%;
   padding: 6px 20px;
   margin: 8px 0;
