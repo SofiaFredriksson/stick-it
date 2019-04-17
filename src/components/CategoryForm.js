@@ -19,8 +19,12 @@ class CategoryForm extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    this.props.toggleFunc()
-    this.props.addCategory(this.state)
+    if (this.state.name.length === 0) {
+      alert("Category name can't be empty.")
+    } else {
+      this.props.toggleFunc()
+      this.props.addCategory(this.state)
+    }
   }
 
   render() {

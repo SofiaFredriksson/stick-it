@@ -1,4 +1,5 @@
 import React from 'react'
+import { Form, TextArea, Grid } from 'semantic-ui-react'
 
 class NoteForm extends React.Component {
   state = {
@@ -29,11 +30,23 @@ class NoteForm extends React.Component {
   render() {
 
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input name="title" type="text" value={this.state.title} onChange={this.handleChange}/><br/>
-        <textarea name="content" type="text" value={this.state.content} onChange={this.handleChange}/><br/>
-        <button type="submit">Submit</button>
-      </form>
+      <div>
+      <Grid>
+        <Form onSubmit={this.handleSubmit} >
+          <Grid.Row>
+            <Grid.Column width={8}>
+              <input name="title" type="text" value={this.state.title} onChange={this.handleChange}/><br/>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column width={8}>
+              <TextArea name="content" type="text" value={this.state.content} onChange={this.handleChange}/><br/>
+            </Grid.Column>
+          </Grid.Row>
+          <button type="submit">Submit</button>
+        </Form>
+      </Grid>
+      </div>
     )
   }
 }

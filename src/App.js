@@ -15,17 +15,12 @@ class App extends Component {
   }
 
   loginUser = (username) => {
-    console.log("holdit")
     fetch(`http://localhost:3000/users`)
       .then(resp => resp.json())
       .then(data => this.setState({
         user: data.find(user => user.username === username)
       }, () => this.props.history.push("/homepage")))
   }
-
-
-
-
 
   render() {
     console.log(this.state.user)

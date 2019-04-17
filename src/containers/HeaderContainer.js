@@ -5,7 +5,8 @@ import CategoryForm from '../components/CategoryForm'
 
 class HeaderContainer extends Component {
   state = {
-    toggle: false
+    toggle: false,
+    searchTerm: "",
   }
 
   toggleFunc = () => {
@@ -25,11 +26,19 @@ class HeaderContainer extends Component {
       }
   }
 
+  handleChange = (event) => {
+    this.setState({
+      searchTerm: event.target.value
+    }, () => this.props.searchBar(this.state.searchTerm))
+  }
+
 
   render() {
+    console.log(this.state)
     return (
       <div className="header-container">
         <h1>Welcome to Stick-It</h1>
+        <input type="text" placeholder="Search" value={this.state.searchTerm} onChange={this.handleChange}/>
         {this.renderPage()}
       </div>
     )

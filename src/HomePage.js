@@ -12,10 +12,11 @@ class HomePage extends Component {
     page: "default",
     categories: [],
     notes: [],
-    user_id: this.props.userID,
+    user_id: 1,
     username: null,
     selectedCategoryId: "empty",
-    currentNote: {}
+    currentNote: {},
+    searchTerm: ""
   }
 
   componentDidMount () {
@@ -31,7 +32,7 @@ class HomePage extends Component {
   renderSection = () => {
     switch (this.state.page) {
       case "default":
-        return <NoteContainer findCategory={this.findCategory} findColor={this.findColor} notes={this.state.notes} pageFunc={this.renderPage} setCurrentNote={this.setCurrentNote} deleteNote={this.deleteNote} />;
+        return <NoteContainer findCategory={this.findCategory} findColor={this.findColor} notes={this.state.notes.filter(note => note.content.toLowerCase().includes(this.state.searchTerm.toLowerCase()) || note.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()))} pageFunc={this.renderPage} setCurrentNote={this.setCurrentNote} deleteNote={this.deleteNote} />;
 
       case "new note":
         return <NoteForm pageFunc={this.renderPage} action={this.addNote}/>;
@@ -122,6 +123,16 @@ class HomePage extends Component {
     })
   }
 
+  searchBar = (searchTerm) => {
+    this.setState({
+      searchTerm: searchTerm
+    })
+  }
+
+  capitalize = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1, string.length)
+  }
+
   render() {
     console.log(this.state.user_id)
     return (
@@ -130,7 +141,7 @@ class HomePage extends Component {
           this.state.user_id === null ?
           <LoginContainer />
           :
-          <HeaderContainer pageFunc={this.renderPage} addCategory={this.addCategory} setCat={this.setCategoryId} categories={this.state.categories}/>}
+          <HeaderContainer searchBar={this.searchBar} pageFunc={this.renderPage} addCategory={this.addCategory} setCat={this.setCategoryId} categories={this.state.categories}/>}
         {this.renderSection()}
       </div>
     );
