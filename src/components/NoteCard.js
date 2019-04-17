@@ -1,4 +1,5 @@
 import React from 'react'
+import './NoteCard.css'
 
 class NoteCard extends React.Component {
   state = {
@@ -6,10 +7,11 @@ class NoteCard extends React.Component {
         width: 300,
         height: 300,
         backgroundColor: this.props.findColor(this.props.note),
-        margin: 8,
+        margin: 12,
         display: "inline-block",
         textAlign: 'center',
-        textOverflow: "hidden"
+        textOverflow: "hidden",
+        boxShadow: "10px 20px 30px fuchsia"
       }
     }
 
@@ -21,13 +23,13 @@ class NoteCard extends React.Component {
 
     return (
       <div style={{...this.state.square, backgroundColor: this.props.findColor(this.props.note)}} >
-        <small>{this.props.findCategory(this.props.note)}</small>
-          <h2 style={{color: "black"}}>
+        <h2>{this.props.findCategory(this.props.note)}</h2>
+          <h1 style={{color: "black"}}>
             {this.props.note.title}
-          </h2>
-          <p>
+          </h1>
+          <h3>
             {this.props.note.content}
-          </p>
+          </h3>
           <button onClick={this.handleClick}>Edit</button>
           <button onClick={() => this.props.deleteNote(this.props.note)}>Delete</button>
         </div>
