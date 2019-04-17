@@ -12,7 +12,7 @@ class HomePage extends Component {
     page: "default",
     categories: [],
     notes: [],
-    user_id: 1,
+    user_id: this.props.userID,
     username: null,
     selectedCategoryId: "empty",
     currentNote: {},
@@ -35,7 +35,7 @@ class HomePage extends Component {
         return <NoteContainer findCategory={this.findCategory} findColor={this.findColor} notes={this.state.notes.filter(note => note.content.toLowerCase().includes(this.state.searchTerm.toLowerCase()) || note.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()))} pageFunc={this.renderPage} setCurrentNote={this.setCurrentNote} deleteNote={this.deleteNote} />;
 
       case "new note":
-        return <NoteForm pageFunc={this.renderPage} action={this.addNote}/>;
+        return <NoteForm categoryID={this.state.selectedCategoryId} pageFunc={this.renderPage} action={this.addNote}/>;
 
       case "edit note":
         return <EditNoteForm pageFunc={this.renderPage} editNote={this.editNote} currentNote={this.state.currentNote}/>;
@@ -134,9 +134,9 @@ class HomePage extends Component {
   }
 
   render() {
-    console.log(this.state.user_id)
+    console.log(this.state.selectedCategoryId)
     return (
-      <div className="App">
+      <div>
         {
           this.state.user_id === null ?
           <LoginContainer />

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import CategorySelect from '../components/CategorySelect'
 import CategoryForm from '../components/CategoryForm'
+import './HeaderContainer.css'
 
 
 class HeaderContainer extends Component {
@@ -37,8 +38,8 @@ class HeaderContainer extends Component {
     console.log(this.state)
     return (
       <div className="header-container">
-        <h1>Welcome to Stick-It</h1>
-        <input type="text" placeholder="Search" value={this.state.searchTerm} onChange={this.handleChange}/>
+        <h1>Welcome to Disco Stick-It</h1>
+        <input type="text" placeholder="Search" value={this.state.searchTerm} onChange={this.handleChange}/><br/>
         {this.renderPage()}
       </div>
     )

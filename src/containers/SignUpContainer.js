@@ -1,5 +1,6 @@
 import React from 'react'
 import { withRouter } from "react-router-dom"
+import './HomeContainer.css'
 
 class SignUpContainer extends React.Component {
 
@@ -31,11 +32,14 @@ class SignUpContainer extends React.Component {
   render() {
 
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input type="text" name="username" value={this.state.username} onChange={this.handleChange}/>
-        <button type="submit">Signup</button>
-        <button onClick={() => this.props.history.push("/login")}>Login</button>
-      </form>
+      <div className="homeContainer">
+        <h1>Welcome to Disco Stick It! </h1>
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" name="username" placeholder="username" value={this.state.username} onChange={this.handleChange}/>
+          <button type="submit">Signup</button>
+          <button onClick={() => this.props.history.push("/login")}>Login</button>
+        </form>
+      </div>
     )
   }
 

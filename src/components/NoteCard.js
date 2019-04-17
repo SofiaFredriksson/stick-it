@@ -1,6 +1,17 @@
 import React from 'react'
 
 class NoteCard extends React.Component {
+  state = {
+    square: {
+        width: 300,
+        height: 300,
+        backgroundColor: this.props.findColor(this.props.note),
+        margin: 8,
+        display: "inline-block",
+        textAlign: 'center',
+        textOverflow: "hidden"
+      }
+    }
 
   handleClick = () => {
     this.props.setCurrentNote(this.props.note)
@@ -9,7 +20,7 @@ class NoteCard extends React.Component {
   render () {
 
     return (
-      <div style={{ backgroundColor: this.props.findColor(this.props.note) }}>
+      <div style={this.state.square} >
         <small>{this.props.findCategory(this.props.note)}</small>
           <h2 style={{color: "black"}}>
             {this.props.note.title}

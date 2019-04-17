@@ -1,10 +1,35 @@
 import React from 'react'
-import { Form, TextArea, Grid } from 'semantic-ui-react'
+import './NoteForm.css'
 
 class NoteForm extends React.Component {
   state = {
     title: "",
     content: "",
+      square: {
+          width: 300,
+          height: 300,
+          backgroundColor: "",
+          margin: 8,
+          display: "inline-block",
+          textAlign: 'center',
+          textOverflow: "hidden"
+        }
+  }
+
+  componentDidMount() {
+    fetch(`http://localhost:3000/categories/${this.props.categoryID}`)
+      .then(res => res.json())
+      .then(data => this.setState({
+        square: {
+          width: 300,
+          height: 300,
+          backgroundColor: data.color,
+          margin: 8,
+          display: "inline-block",
+          textAlign: 'center',
+          textOverflow: "hidden"
+          }
+      }))
   }
 
   handleChange = (event) => {
@@ -30,22 +55,12 @@ class NoteForm extends React.Component {
   render() {
 
     return (
-      <div>
-      <Grid>
-        <Form onSubmit={this.handleSubmit} >
-          <Grid.Row>
-            <Grid.Column width={8}>
+      <div style={this.state.square}>
+        <form onSubmit={this.handleSubmit} >
               <input name="title" type="text" value={this.state.title} onChange={this.handleChange}/><br/>
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row>
-            <Grid.Column width={8}>
-              <TextArea name="content" type="text" value={this.state.content} onChange={this.handleChange}/><br/>
-            </Grid.Column>
-          </Grid.Row>
+              <textarea name="content" type="text" value={this.state.content} onChange={this.handleChange}/><br/>
           <button type="submit">Submit</button>
-        </Form>
-      </Grid>
+        </form>
       </div>
     )
   }

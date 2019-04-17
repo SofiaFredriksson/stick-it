@@ -1,6 +1,6 @@
 import React from 'react'
 import NoteCard from '../components/NoteCard'
-
+import './NoteContainer.css'
 
 class NoteContainer extends React.Component {
 
@@ -12,7 +12,7 @@ class NoteContainer extends React.Component {
 
   render() {
     return (
-      <div className="note-container">
+      <div className="boxes">
         {this.renderNotes()}
       </div>
     )
