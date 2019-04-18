@@ -134,7 +134,7 @@ class HomePage extends Component {
   }
 
   render() {
-    console.log(this.state.selectedCategoryId)
+    console.log(localStorage.getItem("user"))
     return (
       <div>
         {

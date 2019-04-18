@@ -17,10 +17,20 @@ class App extends Component {
   loginUser = (username) => {
     fetch(`http://localhost:3000/users`)
       .then(resp => resp.json())
-      .then(data => this.setState({
-        user: data.find(user => user.username === username)
-      }, () => this.props.history.push("/homepage")))
+      .then(data => {
+        if (data.some(user => user.username === username)) {
+          this.setState({
+            user: data.find(user => user.username === username)}, (data) => {
+                  this.props.history.push("/homepage")
+                  localStorage.setItem("user", this.state.user.id)
+                })
+            } else {
+              alert("invalid")
+            }
+          })
   }
+
+
 
   render() {
     console.log(this.state.user)
@@ -29,7 +39,7 @@ class App extends Component {
         <Switch>
           <Route
             path="/homepage"
-            render={(routerProps) => <HomePage {...routerProps} userID={this.state.user.id}/> }
+            render={(routerProps) => <HomePage {...routerProps} userID={localStorage.getItem('user')}/> }
           />
           <Route
             path="/signup"
@@ -44,6 +54,18 @@ class App extends Component {
             render={(routerProps) => <HomeContainer {...routerProps}/>}
           />
         </Switch>
+        {
+          localStorage.getItem("user") &&
+          <button style={{position:"fixed",
+                  bottom: "0",
+                  right: "0"
+                  }}
+                  onClick={() =>  {
+                    localStorage.removeItem("user")
+                    this.props.history.push("/")
+                  }}>Sign Out</button>
+
+        }
       </div>
     )
   }
